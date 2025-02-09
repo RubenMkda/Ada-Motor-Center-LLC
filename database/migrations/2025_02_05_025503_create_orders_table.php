@@ -15,19 +15,29 @@ return new class extends Migration
             $table->foreignId('vehicle_id')->nullable()->constrained()->onDelete('set null');
             $table->foreignId('auction_vehicle_id')->nullable()->constrained()->onDelete('set null');
             $table->decimal('total_amount', 12, 2);
-            $table->decimal('broker_fee', 8, 2)->nullable();
             $table->enum('status', ['pendiente', 'completado', 'cancelado'])->default('pendiente');
-            $table->timestamps(0);  // This will create created_at and updated_at columns.
-            $table->softDeletes();  // This adds deleted_at column for soft deletes.
+            $table->timestamps(0); 
+            $table->softDeletes();  
 
             // Add indexes
             $table->index('user_id');
             $table->index('type');
         });
+
+        Schema::create('broker_fees', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('order_id')->constrained()->onDelete('cascade');
+            $table->decimal('broker_fee', 8, 2);
+            $table->timestamps(0); 
+            $table->softDeletes();
+            $table->index('order_id');
+        });
     }
 
     public function down()
     {
+        Schema::dropIfExists('broker_fees');
         Schema::dropIfExists('orders');
     }
 };
+

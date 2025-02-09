@@ -16,10 +16,9 @@ return new class extends Migration
             $table->enum('applicable_to', ['dealer', 'broker', 'ambos']);
             $table->date('valid_from');
             $table->date('valid_until');
-            $table->timestamps(0);  // This will create created_at and updated_at columns.
-            $table->softDeletes();  // This adds deleted_at column for soft deletes.
+            $table->timestamps(0);  
+            $table->softDeletes();  
 
-            // Add index to code column
             $table->index('code');
         });
     }
