@@ -18,6 +18,7 @@ class Auction extends Model
     protected $fillable = [
         'name',
         'url',
+        'description'
     ];
 
     /**
@@ -37,5 +38,10 @@ class Auction extends Model
     public function vehicles()
     {
         return $this->hasMany(Vehicle::class);
+    }
+
+    public function images()
+    {
+        return $this->hasMany(AuctionImage::class);
     }
 }

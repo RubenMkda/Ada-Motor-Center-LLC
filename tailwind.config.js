@@ -16,6 +16,13 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                'helvetica': ['Helvetica Compressed', 'sans-serif'],
+                'helvetica-bold': ['Helvetica Bold', 'sans-serif'],
+            },
+            colors: {
+                primary: '#566f99', 
+                secondary: '#4b498c', 
+                greenBold: '#141324', 
             },
         },
     },

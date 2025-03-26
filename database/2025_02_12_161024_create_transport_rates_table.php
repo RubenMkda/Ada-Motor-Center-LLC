@@ -7,17 +7,20 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('auctions', function (Blueprint $table) {
+        Schema::create('transport_rates', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 100)->unique();
-            $table->string('url', 255);
+            $table->string('origin', 100);
+            $table->string('destination', 100);
+            $table->decimal('rate', 8, 2);
             $table->timestamps();
             $table->softDeletes();
+            
+            $table->index(['origin', 'destination']);
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('auctions');
+        Schema::dropIfExists('transport_rates');
     }
 };

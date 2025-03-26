@@ -19,7 +19,6 @@ return new class extends Migration
             $table->timestamps(0); 
             $table->softDeletes();  
 
-            // Add indexes
             $table->index('user_id');
             $table->index('type');
         });

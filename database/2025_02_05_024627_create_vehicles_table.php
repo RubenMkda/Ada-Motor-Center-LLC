@@ -9,16 +9,15 @@ return new class extends Migration {
     {
         Schema::create('vehicles', function (Blueprint $table) {
             $table->id();
-            $table->string('make', 100);
-            $table->string('model', 100);
+            $table->foreignId('make_id')->constrained('makes')->onDelete('cascade'); 
+            $table->foreignId('model_id')->constrained('models')->onDelete('cascade'); 
             $table->year('year');
             $table->decimal('price', 12, 2);
             $table->string('VIN', 17)->unique();
             $table->enum('status', ['disponible', 'vendido', 'reservado'])->default('disponible');
+            $table->string('stripe_price_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
-            $table->index('make');
-            $table->index('model');
             $table->index('year');
             $table->index('price');
         });

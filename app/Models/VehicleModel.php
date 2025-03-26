@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Model extends Model
+class VehicleModel extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -26,6 +26,7 @@ class Model extends Model
      * @var array
      */
     protected $hidden = [];
+    protected $table = 'models';
 
     /**
      * Get the make that owns the model.
@@ -33,5 +34,10 @@ class Model extends Model
     public function make()
     {
         return $this->belongsTo(Make::class);
+    }
+
+    public function vehicles()
+    {
+        return $this->hasMany(Vehicle::class);
     }
 }

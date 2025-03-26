@@ -12,13 +12,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('auction_id')->constrained()->onDelete('cascade');
-            $table->string('VIN', 17);
-            $table->enum('status', ['pendiente', 'en_proceso', 'comprado'])->default('pendiente');
+            $table->enum('status', ['pendiente', 'en_revision', 'aprobado', 'ganado', 'no_ganado', 'pagado', 'enviado'])->default('pendiente');
             $table->timestamps(0);  
             $table->softDeletes(); 
 
-            // Add index to VIN column
-            $table->index('VIN');
         });
     }
 

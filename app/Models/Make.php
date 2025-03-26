@@ -16,7 +16,7 @@ class Make extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
+        'name', 
     ];
 
     /**
@@ -32,5 +32,10 @@ class Make extends Model
     public function vehicles()
     {
         return $this->hasMany(Vehicle::class);
+    }
+
+    public function models()
+    {
+        return $this->hasMany(VehicleModel::class);
     }
 }
