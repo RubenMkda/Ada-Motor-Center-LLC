@@ -1,7 +1,7 @@
 <script setup>
 import { reactive, computed, watch } from 'vue';
 import { router } from '@inertiajs/vue3';
-import HomeLayout from '@/Layouts/HomeLayout.vue';
+import HomeLayout from '@/layouts/HomeLayout.vue';
 
 const props = defineProps({
   vehicles: Object,
@@ -14,15 +14,14 @@ const props = defineProps({
 });
 
 const form = reactive({
-  make_id: props.filters.make_id || '', // Cambiar a make_id
-  model_id: props.filters.model_id || '', // Cambiar a model_id
+  make_id: props.filters.make_id || '',
+  model_id: props.filters.model_id || '', 
   year: props.filters.year || '',
   min_price: props.filters.min_price ?? props.priceRange.min,
   max_price: props.filters.max_price ?? props.priceRange.max,
   status: props.filters.status || '',
 });
 
-// Filtrar modelos localmente en función de la marca seleccionada
 const filteredModels = computed(() => {
   if (!form.make_id) return [];
   return props.models.filter(model => model.make_id === form.make_id);
@@ -36,7 +35,6 @@ const updateMaxPrice = (e) => {
   form.max_price = Math.max(Number(e.target.value), form.min_price);
 };
 
-// Función para enviar los filtros automáticamente
 const applyFilters = () => {
   router.get(route('vehicles.index'), {
     ...form,
@@ -59,7 +57,7 @@ watch(
 
 <template>
   <HomeLayout :can-login="canLogin" :can-register="canRegister">
-    <div class="container mx-auto px-4">
+    <div class="px-4">
       <h1 class="text-xl font-bold mb-4">Lista de Vehículos</h1>
 
       <div class="bg-white rounded-lg shadow-md p-6 mb-6">
@@ -101,7 +99,6 @@ watch(
             </div>
           </div>
 
-          <!-- Rango de Precio -->
           <div class="space-y-2">
             <label class="block text-sm font-medium text-gray-700">Rango de Precio (€)</label>
             <div class="flex items-center gap-4">
@@ -163,7 +160,6 @@ watch(
         </a>
       </div>
 
-      <!-- Paginación -->
       <div class="mt-6 flex justify-center space-x-2">
         <button
           v-if="vehicles.prev_page_url"

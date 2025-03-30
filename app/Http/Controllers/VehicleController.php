@@ -48,7 +48,7 @@ class VehicleController extends Controller
     {
         $vehicle->load('photos');
 
-        return Inertia::render('Vehicles/Show', [
+        return Inertia::render('vehicles/Show', [
             'vehicle' => $vehicle,
         ]);
     }

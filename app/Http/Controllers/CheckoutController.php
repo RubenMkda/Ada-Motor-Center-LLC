@@ -9,7 +9,6 @@ use Inertia\Inertia;
 use App\Models\Vehicle;
 use Illuminate\Support\Facades\Log;
 use Laravel\Cashier\Cashier;
-
 class CheckoutController extends Controller
 {
     public function show(Vehicle $vehicle)

@@ -1,16 +1,30 @@
-<script setup>
+<script setup lang="ts">
 import { defineProps } from "vue";
-import HomeLayout from '@/Layouts/HomeLayout.vue';
+import HomeLayout from '@/layouts/HomeLayout.vue';
 
-defineProps({
-  vehicle: Object,
-  canLogin: Boolean,
-  canRegister: Boolean,
-});
+interface Photo {
+  id: number;
+  photo_path: string;
+}
+
+interface Vehicle {
+  id: number;
+  make: string;
+  model: string;
+  year: number;
+  price: number;
+  status: string;
+  VIN: string;
+  photos: Photo[];
+}
+
+const props = defineProps<{
+  vehicle: Vehicle;
+}>();
 </script>
 
 <template>
-  <HomeLayout :can-login="canLogin" :can-register="canRegister">
+  <HomeLayout>
     <div class="container mx-auto px-4 py-8">
       <h1 class="text-3xl font-bold mb-6">{{ vehicle.make }} {{ vehicle.model }}</h1>
 
@@ -43,12 +57,7 @@ defineProps({
         >
           Volver a la lista
         </a>
-        <a 
-          :href="route('vehicles.checkout.show', { vehicle: vehicle.id })" 
-          class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-        >
-          Pagar ahora
-        </a>
+       
       </div>
     </div>
   </HomeLayout>
